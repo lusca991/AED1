@@ -1,4 +1,3 @@
-// pessoa.c
 #include <stdio.h>
 #include "pessoa.h"
 
