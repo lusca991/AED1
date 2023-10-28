@@ -5,7 +5,7 @@ int main() {
     Pessoa pessoa1;
     Pessoa *ponteiroPessoa = &pessoa1;
 
-    preencherDados(ponteiroPessoa, "João da Silva", "15/05/1990", "123.456.789-00");
+    preencherDados(ponteiroPessoa, "Lucas Viana", "15/11/1993", "555.555.555-55");
     imprimirDados(ponteiroPessoa);
 
     return 0;
