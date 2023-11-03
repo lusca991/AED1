@@ -1,2 +1,2 @@
 # AED1
-Atividades semestrais de Algoritmo e estrutura de dados I
+Atividades semestrais de Algoritmo e Estrutura de Dados I
