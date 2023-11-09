@@ -1,105 +1,120 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "lista.h"
 
-//função de criação da lista do exercício anterior
-Lista* criarLista(int tam){
-    Lista *lista = (Lista*)malloc(sizeof(Lista));
-    lista->tam=tam; 
-    lista->n = (int*)malloc(sizeof(int) * tam);
-    return lista;
-}
-//função free do exercício anterior
-void liberaLista(Lista *lista ){
-    free (lista->n);
-    free (lista);
+//função para criar uma nova LISTA 
+Lista* criarLista(int tam) {
+    Lista *novaLista = (Lista*)malloc(sizeof(Lista));
+    if (novaLista == NULL) {
+        return NULL; 
+    }
+    novaLista->n = (int*)malloc(tam * sizeof(int));
+    if (novaLista->n == NULL) {
+        free(novaLista);
+        return NULL; 
+    }
+    novaLista->tam = tam;
+    return novaLista;
 }
 
-//inserção de elemento levemente diferente, sem o valor posição dessa vez
+//função free
+void liberaLista(Lista *lista) {
+    if (lista != NULL) {
+        free(lista->n);
+        free(lista);
+    }
+}
+
+//função de inserção
 void inserirElemento(Lista *lista, int valor) {
-    if (lista->tam < sizeof(lista->n) / sizeof(lista->n[0])) {
-        lista->n[lista->tam] = valor;
-        lista->tam++;
-    } else {
-        printf("ERROR, a lista tá cheia doidão o/");
+    if (lista != NULL) {
+        // Insira o valor no final da lista (você pode adicionar lógica para inserção ordenada)
+        lista->n[lista->tam++] = valor;
     }
 }
 
-//função de inserção ordenada 
+//função para inserção elemento de forma ordenada 
 void inserirOrdenado(Lista *lista, int valor) {
-    int i, j;
-    for (i = 0; i < lista->tam; i++) {
-        if (lista->n[i] > valor) {
-            break;
+    if (lista != NULL) {
+        int i = lista->tam - 1;
+        while (i >= 0 && lista->n[i] > valor) {
+            lista->n[i + 1] = lista->n[i];
+            i--;
         }
+        lista->n[i + 1] = valor;
+        lista->tam++;
     }
-    for (j = lista->tam; j > i; j--) {
-        lista->n[j] = lista->n[j - 1];
-    }
-    lista->n[i] = valor;
-    lista->tam++;
 }
 
-
-//print recursivo e iterativo
-void imprimir(Lista *lista, int index) {
-    if (index == lista->tam) {
-        return;
+//print iterativo
+void imprimir(Lista *lista) {
+    if (lista != NULL) {
+        for (int i = 0; i < lista->tam; i++) {
+            printf("%d ", lista->n[i]);
+        }
+        printf("\n");
     }
-    printf("%d ", lista->n[index]);
-    imprimir(lista, index + 1);
 }
 
-//função para buscar um elemento em uma lista usando recursividade sem função auxiliar dessa vez
+//função de busca binária recursiva
 int buscaBinariaRecursiva(Lista *lista, int valor, int esq, int dir) {
-    if (dir >= esq) {
+    if (esq <= dir) {
         int meio = esq + (dir - esq) / 2;
         if (lista->n[meio] == valor) {
             return meio;
-        }
-        if (lista->n[meio] > valor) {
+        } else if (lista->n[meio] < valor) {
+            return buscaBinariaRecursiva(lista, valor, meio + 1, dir);
+        } else {
             return buscaBinariaRecursiva(lista, valor, esq, meio - 1);
         }
-        return buscaBinariaRecursiva(lista, valor, meio + 1, dir);
     }
-    return -1;
+    return -1; 
 }
 
-// Função para buscar o maior elemento em uma lista usando um algoritmo recursivo
-int buscaMaior(Lista *lista, int index, int max) {
-    if (index == lista->tam) {
-        return max;
+//print recursivo
+void imprimirRecursivo(Lista *lista, int index) {
+    if (index < lista->tam) {
+        printf("%d ", lista->n[index]);
+        imprimirRecursivo(lista, index + 1);
     }
-    if (lista->n[index] > max) {
-        max = lista->n[index];
-    }
-    return buscaMaior(lista, index + 1, max);
 }
 
-// Função para buscar o menor elemento em uma lista usando um algoritmo recursivo
-int buscaMenor(Lista *lista, int index, int min) {
-    if (index == lista->tam) {
-        return min;
+//função para buscar o maior elemento em uma lista (algoritmo recursivo)
+int buscaMaiorRecursivo(Lista *lista, int index, int maior) {
+    if (index < lista->tam) {
+        if (lista->n[index] > maior) {
+            maior = lista->n[index];
+        }
+        return buscaMaiorRecursivo(lista, index + 1, maior);
     }
-    if (lista->n[index] < min) {
-        min = lista->n[index];
-    }
-    return buscarMenor(lista, index + 1, min);
+    return maior;
 }
 
-// Função para retornar a soma de todos os elementos de uma lista usando um algoritmo recursivo
-int retornarSoma(Lista *lista, int index) {
-    if (index == lista->tam) {
-        return 0;
+//função para buscar o menor elemento em uma lista (algoritmo recursivo)
+int buscaMenorRecursivo(Lista *lista, int index, int menor) {
+    if (index < lista->tam) {
+        if (lista->n[index] < menor) {
+            menor = lista->n[index];
+        }
+        return buscaMenorRecursivo(lista, index + 1, menor);
     }
-    return lista->n[index] + retornarSoma(lista, index + 1);
+    return menor;
 }
 
-// Função para retornar o produto de todos os elementos de uma lista usando um algoritmo recursivo
-int retornarProduto(Lista *lista, int index) {
-    if (index == lista->tam) {
-        return 1;
+//função para retornar a soma da lista (algoritmo recursivo)
+int retornarSomaRecursiva(Lista *lista, int index, int soma) {
+    if (index < lista->tam) {
+        soma += lista->n[index];
+        return retornarSomaRecursiva(lista, index + 1, soma);
     }
-    return lista->n[index] * retornarProduto(lista, index + 1);
+    return soma;
+}
+
+//função para retornar o produto da lista (algoritmo recursivo)
+int retornarProdutoRecursivo(Lista *lista, int index, int produto) {
+    if (index < lista->tam) {
+        produto *= lista->n[index];
+        return retornarProdutoRecursivo(lista, index + 1, produto);
+    }
+    return produto;
 }

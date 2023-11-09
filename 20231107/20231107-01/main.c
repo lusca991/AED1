@@ -1,44 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include "lista.h"
 
-
 int main() {
-    srand(time(0));
-
     Lista *minhaLista = criarLista(10);
 
-    for (int i = 0; i < 10; i++) {
-        int valor = rand() % 100; 
-        inserirOrdenado(minhaLista, valor);
-    }
+    inserirElemento(minhaLista, 5);
+    inserirElemento(minhaLista, 3);
+    inserirElemento(minhaLista, 8);
+    inserirElemento(minhaLista, 1);
+    inserirElemento(minhaLista, 7);
 
-printf("Elementos da Lista: ");
-imprimir(minhaLista, 0); 
-printf("\n");
+    printf("Elementos da lista: ");
+    imprimir(minhaLista);
 
-    int busca = 42; 
-    int posicao = buscaBinariaRecursiva(minhaLista, busca, 0, minhaLista->tam - 1);
+    int valorBuscado = 3;
+    int posicao = buscaBinariaRecursiva(minhaLista, valorBuscado, 0, minhaLista->tam - 1);
     if (posicao != -1) {
-        printf("Elemento %d encontrado na posição %d pela busca binária recursiva.\n", busca, posicao);
+        printf("%d encontrado na posição %d\n", valorBuscado, posicao);
     } else {
-        printf("Elemento %d não encontrado pela busca binária recursiva.\n", busca);
+        printf("%d não encontrado na lista\n", valorBuscado);
     }
 
-    int maior = buscaMaior(minhaLista, 0, minhaLista->n[0]);
-    printf("Maior elemento encontrado: %d\n", maior);
+    printf("Elementos da lista (recursivo): ");
+    imprimirRecursivo(minhaLista, 0);
+    printf("\n");
 
-    int menor = buscaMenor(minhaLista, 0, minhaLista->n[0]);
-    printf("Menor elemento encontrado: %d\n", menor);
+    int maior = buscaMaiorRecursivo(minhaLista, 0, minhaLista->n[0]);
+    printf("Maior elemento: %d\n", maior);
 
-    int soma = retornarSoma(minhaLista, 0);
-    printf("A soma de todos os elementos: %d\n", soma);
+    int menor = buscaMenorRecursivo(minhaLista, 0, minhaLista->n[0]);
+    printf("Menor elemento: %d\n", menor);
 
-    int produto = retornarProduto(minhaLista, 0);
-    printf("O produto de todos os elementos: %d\n", produto);
+    int soma = retornarSomaRecursiva(minhaLista, 0, 0);
+    printf("Soma de todos os elementos: %d\n", soma);
 
-    liberarLista(minhaLista);
+     int produto = retornarProdutoRecursivo(minhaLista, 0, 1);
+    printf("Produto de todos os elementos: %d\n", produto);
+
+    liberaLista(minhaLista);
 
     return 0;
 }
