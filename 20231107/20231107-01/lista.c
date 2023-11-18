@@ -28,7 +28,6 @@ void liberaLista(Lista *lista) {
 //função de inserção
 void inserirElemento(Lista *lista, int valor) {
     if (lista != NULL) {
-        // Insira o valor no final da lista (você pode adicionar lógica para inserção ordenada)
         lista->n[lista->tam++] = valor;
     }
 }
