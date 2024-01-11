@@ -15,7 +15,7 @@ int m_hash(int cod_pac){
 int inserir(Hash tab, Paciente pac){
     int h = m_hash(pac.cod_pac);
 
-    // Encontrar a primeira posição disponível
+    
     while (tab[h] != NULL)
         h = (h + 1) % N;
 
@@ -24,20 +24,20 @@ int inserir(Hash tab, Paciente pac){
         *tab[h] = pac;
         return 1;
     }
-    return 0;  // Não foi possível inserir
+    return 0;  
 }
 
 Paciente* busca(Hash tab, int cod_pac){
     int h = m_hash(cod_pac);
     
-    // Procurar o paciente na tabela
+    
     while (tab[h] != NULL){
         if (tab[h]->cod_pac == cod_pac)
             return tab[h];
         h = (h + 1) % N;
     }
     
-    return NULL;  // Paciente não encontrado
+    return NULL;  
 }
 
 void imprimir(Hash tab){
