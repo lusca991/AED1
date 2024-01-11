@@ -13,6 +13,29 @@ void inicializar(TB_Hash tab){
     }
 }
 
+int excluir(TB_Hash tab, int cod_pac) {
+    int h = m_hash(cod_pac);
+    Elemento *anterior = NULL;
+    Elemento *atual = tab[h];
+
+    while (atual != NULL) {
+        if (atual->pac.cod_pac == cod_pac) {
+            if (anterior == NULL) {
+                tab[h] = atual->prox;
+            } else {
+                anterior->prox = atual->prox;
+            }
+
+            free(atual);
+            return 1;  
+        }
+
+        anterior = atual;
+        atual = atual->prox;
+    }
+
+    return 0;  
+}
 
 int inserir(TB_Hash tab, Paciente pac)
 {

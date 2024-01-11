@@ -12,20 +12,39 @@ int m_hash(int cod_pac){
     return (cod_pac % N);
 }
 
-int inserir(Hash tab, Paciente pac){
+int inserir(Hash tab, Paciente pac) {
     int h = m_hash(pac.cod_pac);
 
-    
-    while (tab[h] != NULL)
+    while (tab[h] != NULL && tab[h]->disponivel == 0) {
         h = (h + 1) % N;
+    }
 
-    if (tab[h] == NULL){
+    if (tab[h] == NULL || tab[h]->disponivel == 1) {
         tab[h] = malloc(sizeof(Paciente));
         *tab[h] = pac;
-        return 1;
+        tab[h]->disponivel = 0;  
+        return 1;  
     }
+
     return 0;  
 }
+
+
+int excluir(Hash tab, int cod_pac) {
+    int h = m_hash(cod_pac);
+
+    while (tab[h] != NULL) {
+        if (tab[h]->cod_pac == cod_pac) {
+            free(tab[h]);
+            tab[h]->disponivel = 1;
+            return 1;  
+        }
+        h = (h + 1) % N;
+    }
+
+    return 0; 
+}
+
 
 Paciente* busca(Hash tab, int cod_pac){
     int h = m_hash(cod_pac);

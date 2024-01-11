@@ -20,6 +20,7 @@ typedef Elemento* TB_Hash[N];
 
 int m_hash(int cod_pac);
 int inserir(TB_Hash tab, Paciente pac);
+int excluir(TB_Hash tab, int cod_pac);
 void inicializar(TB_Hash tab);
 void mostrarHash(TB_Hash tab);
 Paciente* busca(TB_Hash tab, int cod_pac);

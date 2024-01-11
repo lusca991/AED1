@@ -2,36 +2,47 @@
 #include <stdlib.h>
 #include "hash_ligada.h"
 
-int main (){
+int main() {
     TB_Hash tabela;
     Paciente p, *pr;
-    inicializar (tabela);
+    inicializar(tabela);
 
-    p.cod_pac =  1291;
+    p.cod_pac = 1291;
     p.nome = "Aguinaldo";
-    p.cpf = "00000000000";    
+    p.cpf = "00000000000";
     p.idade = 48;
-    inserir (tabela, p);
+    inserir(tabela, p);
 
-    p.cod_pac =  1191;
+    p.cod_pac = 1191;
     p.nome = "Camilly";
-    p.cpf = "00000000000";    
+    p.cpf = "00000000000";
     p.idade = 14;
-    inserir (tabela, p);
+    inserir(tabela, p);
 
-    p.cod_pac =  1089;
+    p.cod_pac = 1089;
     p.nome = "Adriano";
-    p.cpf = "00000000000";    
+    p.cpf = "00000000000";
     p.idade = 18;
-    inserir (tabela, p);
+    inserir(tabela, p);
 
-    mostrarHash (tabela);
+    mostrarHash(tabela);
+
+    pr = busca(tabela, 1089);
+    if (pr != NULL) {
+        printf("\nNome encontrado: %s\n", pr->nome);
+    } else {
+        printf("\nPaciente não encontrado.\n");
+    }
+
+    int cod_pac_a_excluir = 1191;
+    if (excluir(tabela, cod_pac_a_excluir)) {
+        printf("\nPaciente de codigo %d excluido com sucesso.\n", cod_pac_a_excluir);
+    } else {
+        printf("\nPaciente de codigo %d nao encontrado.\n", cod_pac_a_excluir);
+    }
+
+    mostrarHash(tabela);
 
 
-    pr = busca (tabela, 1089);
-    printf ("\nNome encontrado: %s\n", pr->nome);
+    return 0;
 }
-
-
-
-//AAAAAAAAAAAAAAAAAAA

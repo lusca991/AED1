@@ -8,6 +8,7 @@ typedef struct {
     char *nome;
     char *cpf;
     int idade;
+    int disponivel
 } Paciente;
 
 typedef Paciente* Hash[N];
