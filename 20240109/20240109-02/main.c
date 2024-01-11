@@ -31,3 +31,7 @@ int main (){
     pr = busca (tabela, 1089);
     printf ("\nNome encontrado: %s\n", pr->nome);
 }
+
+
+
+//AAAAAAAAAAAAAAAAAAA

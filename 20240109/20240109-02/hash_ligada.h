@@ -25,3 +25,5 @@ void mostrarHash(TB_Hash tab);
 Paciente* busca(TB_Hash tab, int cod_pac);
 
 #endif
+
+//AAAAAAAAAAAAAAAAA

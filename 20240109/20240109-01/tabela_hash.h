@@ -19,3 +19,5 @@ Paciente* busca(Hash tab, int cod_pac);
 void imprimir(Hash tab);
 
 #endif
+
+//AAAAAAAAAAAAAAAAAAAA

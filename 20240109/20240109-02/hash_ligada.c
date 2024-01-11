@@ -73,3 +73,6 @@ void mostrarHash(TB_Hash tab)
     }
     printf("\n");
 }
+
+
+//AAAAAAAAAAA

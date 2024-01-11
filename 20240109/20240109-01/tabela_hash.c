@@ -54,3 +54,6 @@ void imprimir(Hash tab){
             printf("Paciente: [%d] NULL\n", i);
     }
 }
+
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaa
